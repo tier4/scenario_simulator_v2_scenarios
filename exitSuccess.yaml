@@ -1,0 +1,66 @@
+OpenSCENARIO:
+  FileHeader:
+    author: 'Piotr Zyskowski'
+    date: '2023-06-20T22:47:53+02:00'
+    description: 'exitSuccess test'
+    revMajor: 1
+    revMinor: 0
+  ParameterDeclarations:
+    ParameterDeclaration: []
+  CatalogLocations:
+    CatalogLocation: []
+  RoadNetwork:
+    LogicFile:
+      filepath: /home/pzyskowski/projects/tier/660/AWSIM/map/nishishinjuku_autoware_map/
+    TrafficSignals:
+      TrafficSignalController: []
+  Entities: 
+    ScenarioObject: []
+  Storyboard:
+    Init:
+      Actions:
+        UserDefinedAction:
+          CustomCommandAction:
+            type: exitSuccess
+    Story:
+      - name: ''
+        Act:
+          - name: _EndCondition
+            ManeuverGroup:
+              - maximumExecutionCount: 1
+                name: ''
+                Actors: 
+                  selectTriggeringEntities: false
+                  EntityRef: []
+                Maneuver:
+                  - name: ''
+                    Event:
+                      - name: ''
+                        priority: parallel
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByValueCondition:
+                                    SimulationTimeCondition:
+                                      value: 0 
+                                      rule: greaterThan
+                        Action:
+                          - name: ''
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: exitFailure
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - name: ''
+                      delay: 0
+                      conditionEdge: none
+                      ByValueCondition:
+                        SimulationTimeCondition:
+                          value: 0
+                          rule: greaterThan
+    StopTrigger:
+      ConditionGroup: []
