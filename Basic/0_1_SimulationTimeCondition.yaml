@@ -2,7 +2,7 @@ OpenSCENARIO:
   FileHeader:
     author: 'Piotr Zyskowski'
     date: '2023-06-20T22:47:53+02:00'
-    description: 'exitSuccess test'
+    description: 'SimulationTimeCondition test'
     revMajor: 1
     revMinor: 0
   ParameterDeclarations:
@@ -11,17 +11,16 @@ OpenSCENARIO:
     CatalogLocation: []
   RoadNetwork:
     LogicFile:
-      filepath: ../map
+      filepath: ../map 
     TrafficSignals:
       TrafficSignalController: []
   Entities: 
     ScenarioObject: []
   Storyboard:
+  Storyboard:
     Init:
-      Actions:
-        UserDefinedAction:
-          CustomCommandAction:
-            type: exitSuccess
+      Actions: 
+        GlobalActions: []
     Story:
       - name: ''
         Act:
@@ -51,7 +50,7 @@ OpenSCENARIO:
                           - name: ''
                             UserDefinedAction:
                               CustomCommandAction:
-                                type: exitFailure
+                                type: exitSuccess
             StartTrigger:
               ConditionGroup:
                 - Condition:
