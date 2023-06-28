@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm generator="VMB">
+  <MetaInfo format_version="1" map_version="2"/>
+  <node id="65" lat="" lon="">
+    <tag k="mgrs_code" v="99XXX813499"/>
+    <tag k="local_x" v="81396.1416"/>
+    <tag k="local_y" v="49996.5642"/>
+    <tag k="ele" v="40.448"/>
+  </node>
+  <node id="66" lat="" lon="">
+    <tag k="mgrs_code" v="99XXX813500"/>
+    <tag k="local_x" v="81396.0459"/>
+    <tag k="local_y" v="50016.7055"/>
+    <tag k="ele" v="40.0862"/>
+  </node>
+  <node id="68" lat="" lon="">
+    <tag k="mgrs_code" v="99XXX813499"/>
+    <tag k="local_x" v="81394.1416"/>
+    <tag k="local_y" v="49996.5547"/>
+    <tag k="ele" v="40.448"/>
+  </node>
+  <node id="69" lat="" lon="">
+    <tag k="mgrs_code" v="99XXX813500"/>
+    <tag k="local_x" v="81394.0459"/>
+    <tag k="local_y" v="50016.696"/>
+    <tag k="ele" v="40.0862"/>
+  </node>
+  <way id="67">
+    <nd ref="65"/>
+    <nd ref="66"/>
+    <tag k="type" v="line_thin"/>
+    <tag k="subtype" v="solid"/>
+  </way>
+  <way id="70">
+    <nd ref="68"/>
+    <nd ref="69"/>
+    <tag k="type" v="line_thin"/>
+    <tag k="subtype" v="solid"/>
+  </way>
+  <relation id="71">
+    <member type="way" role="left" ref="70"/>
+    <member type="way" role="right" ref="67"/>
+    <tag k="type" v="lanelet"/>
+    <tag k="subtype" v="road"/>
+    <tag k="speed_limit" v="10"/>
+    <tag k="location" v="urban"/>
+    <tag k="one_way" v="yes"/>
+  </relation>
+</osm>
