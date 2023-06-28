@@ -1,0 +1,86 @@
+OpenSCENARIO:
+  FileHeader:
+    author: 'Piotr Zyskowski'
+    date: '2023-06-20T22:47:53+02:00'
+    description: 'SingleConditionGreater test'
+    revMajor: 1
+    revMinor: 0
+  ParameterDeclarations:
+    ParameterDeclaration: 
+      name: "parameter_name"
+      parameterType: integer
+      value: 10 
+  CatalogLocations:
+    CatalogLocation: []
+  RoadNetwork:
+    LogicFile:
+      filepath: ../map 
+    TrafficSignals:
+      TrafficSignalController: []
+  Entities: 
+    ScenarioObject: []
+  Storyboard:
+  Storyboard:
+    Init:
+      Actions: 
+        GlobalActions: []
+    Story:
+      - name: ''
+        Act:
+          - name: _EndCondition
+            ManeuverGroup:
+              - maximumExecutionCount: 1
+                name: ''
+                Actors: 
+                  selectTriggeringEntities: false
+                  EntityRef: []
+                Maneuver:
+                  - name: ''
+                    Event:
+                      - name: ''
+                        priority: parallel
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByValueCondition:
+                                    ParameterCondition:
+                                      parameterRef: "parameter_name"
+                                      rule: greaterThan
+                                      value: 9
+                        Action:
+                          - name: ''
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: exitSuccess
+                      - name: ''
+                        priority: parallel
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByValueCondition:
+                                    SimulationTimeCondition:
+                                      value: 1 
+                                      rule: greaterThan
+                        Action:
+                          - name: ''
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: exitFailure
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - name: ''
+                      delay: 0
+                      conditionEdge: none
+                      ByValueCondition:
+                        SimulationTimeCondition:
+                          value: 0
+                          rule: greaterThan
+    StopTrigger:
+      ConditionGroup: []
