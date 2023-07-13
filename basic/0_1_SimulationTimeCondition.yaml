@@ -17,7 +17,6 @@ OpenSCENARIO:
   Entities:
     ScenarioObject: []
   Storyboard:
-  Storyboard:
     Init:
       Actions:
         GlobalActions: []
