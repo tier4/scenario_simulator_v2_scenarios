@@ -1,0 +1,6 @@
+Scenario:
+  - path: $(find-pkg-share scenario_simulator_v2_scenarios)/basic/0_0_exitSuccess.yaml
+  - path: $(find-pkg-share scenario_simulator_v2_scenarios)/basic/0_1_SimulationTimeCondition.yaml
+  - path: $(find-pkg-share scenario_simulator_v2_scenarios)/basic/0_2_SingleConditionGreater.yaml
+  - path: $(find-pkg-share scenario_simulator_v2_scenarios)/basic/0_3_SingleConditionEqual.yaml
+  - path: $(find-pkg-share scenario_simulator_v2_scenarios)/basic/0_4_SingleConditionLess.yaml

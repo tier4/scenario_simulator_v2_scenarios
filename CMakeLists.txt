@@ -5,7 +5,7 @@ project(scenario_simulator_v2_scenarios)
 find_package(ament_cmake REQUIRED)
 
 install(
-  DIRECTORY basic map
+  DIRECTORY basic map workflow
   DESTINATION share/${PROJECT_NAME})
 
 ament_package()
