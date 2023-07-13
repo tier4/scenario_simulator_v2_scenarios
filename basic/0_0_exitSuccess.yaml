@@ -11,10 +11,10 @@ OpenSCENARIO:
     CatalogLocation: []
   RoadNetwork:
     LogicFile:
-      filepath: ../map
+      filepath: $(ros2 pkg prefix --share scenario_simulator_v2_scenarios)/map
     TrafficSignals:
       TrafficSignalController: []
-  Entities: 
+  Entities:
     ScenarioObject: []
   Storyboard:
     Init:
@@ -29,7 +29,7 @@ OpenSCENARIO:
             ManeuverGroup:
               - maximumExecutionCount: 1
                 name: ''
-                Actors: 
+                Actors:
                   selectTriggeringEntities: false
                   EntityRef: []
                 Maneuver:
@@ -45,7 +45,7 @@ OpenSCENARIO:
                                   conditionEdge: none
                                   ByValueCondition:
                                     SimulationTimeCondition:
-                                      value: 0 
+                                      value: 0
                                       rule: greaterThan
                         Action:
                           - name: ''
