@@ -2,27 +2,26 @@ OpenSCENARIO:
   FileHeader:
     author: 'Piotr Zyskowski'
     date: '2023-06-20T22:47:53+02:00'
-    description: 'SingleConditionLess test'
+    description: 'SingleConditionEqual test'
     revMajor: 1
     revMinor: 0
   ParameterDeclarations:
-    ParameterDeclaration: 
+    ParameterDeclaration:
       name: "parameter_name"
       parameterType: integer
-      value: 10 
+      value: 10
   CatalogLocations:
     CatalogLocation: []
   RoadNetwork:
     LogicFile:
-      filepath: ../map 
+      filepath: $(ros2 pkg prefix --share scenario_simulator_v2_scenarios)/map
     TrafficSignals:
       TrafficSignalController: []
-  Entities: 
+  Entities:
     ScenarioObject: []
   Storyboard:
-  Storyboard:
     Init:
-      Actions: 
+      Actions:
         GlobalActions: []
     Story:
       - name: ''
@@ -31,7 +30,7 @@ OpenSCENARIO:
             ManeuverGroup:
               - maximumExecutionCount: 1
                 name: ''
-                Actors: 
+                Actors:
                   selectTriggeringEntities: false
                   EntityRef: []
                 Maneuver:
@@ -48,8 +47,8 @@ OpenSCENARIO:
                                   ByValueCondition:
                                     ParameterCondition:
                                       parameterRef: "parameter_name"
-                                      rule: lessThan
-                                      value: 11
+                                      rule: equalTo
+                                      value: 10
                         Action:
                           - name: ''
                             UserDefinedAction:
@@ -65,7 +64,7 @@ OpenSCENARIO:
                                   conditionEdge: none
                                   ByValueCondition:
                                     SimulationTimeCondition:
-                                      value: 1 
+                                      value: 1
                                       rule: greaterThan
                         Action:
                           - name: ''

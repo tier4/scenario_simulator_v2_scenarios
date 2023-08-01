@@ -2,28 +2,26 @@ OpenSCENARIO:
   FileHeader:
     author: 'Piotr Zyskowski'
     date: '2023-06-20T22:47:53+02:00'
-    description: 'SingleConditionEqual test'
+    description: 'exitSuccess test'
     revMajor: 1
     revMinor: 0
   ParameterDeclarations:
-    ParameterDeclaration: 
-      name: "parameter_name"
-      parameterType: integer
-      value: 10 
+    ParameterDeclaration: []
   CatalogLocations:
     CatalogLocation: []
   RoadNetwork:
     LogicFile:
-      filepath: ../map 
+      filepath: $(ros2 pkg prefix --share scenario_simulator_v2_scenarios)/map
     TrafficSignals:
       TrafficSignalController: []
-  Entities: 
+  Entities:
     ScenarioObject: []
   Storyboard:
-  Storyboard:
     Init:
-      Actions: 
-        GlobalActions: []
+      Actions:
+        UserDefinedAction:
+          CustomCommandAction:
+            type: exitSuccess
     Story:
       - name: ''
         Act:
@@ -31,7 +29,7 @@ OpenSCENARIO:
             ManeuverGroup:
               - maximumExecutionCount: 1
                 name: ''
-                Actors: 
+                Actors:
                   selectTriggeringEntities: false
                   EntityRef: []
                 Maneuver:
@@ -46,26 +44,8 @@ OpenSCENARIO:
                                   delay: 0
                                   conditionEdge: none
                                   ByValueCondition:
-                                    ParameterCondition:
-                                      parameterRef: "parameter_name"
-                                      rule: equalTo
-                                      value: 10 
-                        Action:
-                          - name: ''
-                            UserDefinedAction:
-                              CustomCommandAction:
-                                type: exitSuccess
-                      - name: ''
-                        priority: parallel
-                        StartTrigger:
-                          ConditionGroup:
-                            - Condition:
-                                - name: ''
-                                  delay: 0
-                                  conditionEdge: none
-                                  ByValueCondition:
                                     SimulationTimeCondition:
-                                      value: 1 
+                                      value: 0
                                       rule: greaterThan
                         Action:
                           - name: ''
