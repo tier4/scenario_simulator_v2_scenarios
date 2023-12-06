@@ -9,6 +9,7 @@ install(
         catalog
         basic
         MiscObject
+        Pedestrian
         map
         workflow
   DESTINATION share/${PROJECT_NAME})
