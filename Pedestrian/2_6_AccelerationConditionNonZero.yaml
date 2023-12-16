@@ -65,6 +65,56 @@ OpenSCENARIO:
     Story:
       - name: ''
         Act:
+          - name: act_PedestrianSpeedChange
+            ManeuverGroup:
+              - maximumExecutionCount: 1
+                name: act_PedestrianSpeedChange
+                Actors:
+                  selectTriggeringEntities: false
+                  EntityRef:
+                    - entityRef: Pedestrian0
+                Maneuver:
+                  - name: ''
+                    Event:
+                      - name: SpeedChange
+                        priority: parallel
+                        Action:
+                          - name:
+                            PrivateAction:
+                              LongitudinalAction:
+                                SpeedAction:
+                                  SpeedActionDynamics:
+                                    dynamicsDimension: time
+                                    value: 2.0
+                                    dynamicsShape: linear
+                                  SpeedActionTarget:
+                                    AbsoluteTargetSpeed:
+                                      value: 2.0
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: Pedestrian0
+                                    EntityCondition:
+                                      SpeedCondition:
+                                        value: $minimum_speed_difference_at_init
+                                        rule: lessThan
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - name: ''
+                      delay: 0
+                      conditionEdge: none
+                      ByValueCondition:
+                        SimulationTimeCondition:
+                          value: 0
+                          rule: greaterThan
           - name: act_PedestrianAccelerationTest
             ManeuverGroup:
               - maximumExecutionCount: 1
@@ -95,8 +145,20 @@ OpenSCENARIO:
                                         - entityRef: Pedestrian0
                                     EntityCondition:
                                       AccelerationCondition:
-                                        value: $minimum_acceleration_difference_at_standstill
+                                        value: ${1.0 + $minimum_acceleration_difference_at_standstill}
                                         rule: lessThan
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: Pedestrian0
+                                    EntityCondition:
+                                      AccelerationCondition:
+                                        value: ${1.0 - $minimum_acceleration_difference_at_standstill}
+                                        rule: greaterThan
                       - name: Failure
                         priority: parallel
                         Action:
@@ -117,7 +179,43 @@ OpenSCENARIO:
                                         - entityRef: Pedestrian0
                                     EntityCondition:
                                       AccelerationCondition:
-                                        value: $minimum_acceleration_difference_at_standstill
+                                        value: ${1.0 + $minimum_acceleration_difference_at_standstill}
+                                        rule: greaterThan
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: Pedestrian0
+                                    EntityCondition:
+                                      AccelerationCondition:
+                                        value: ${1.0 + $minimum_acceleration_difference_at_standstill}
+                                        rule: equalTo
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: Pedestrian0
+                                    EntityCondition:
+                                      AccelerationCondition:
+                                        value: ${1.0 - $minimum_acceleration_difference_at_standstill}
+                                        rule: equalTo
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: Pedestrian0
+                                    EntityCondition:
+                                      AccelerationCondition:
+                                        value: ${1.0 - $minimum_acceleration_difference_at_standstill}
                                         rule: lessThan
             StartTrigger:
               ConditionGroup:
@@ -127,7 +225,7 @@ OpenSCENARIO:
                       conditionEdge: none
                       ByValueCondition:
                         SimulationTimeCondition:
-                          value: 0
+                          value: 1
                           rule: greaterThan
           - name: _EndCondition
             ManeuverGroup:
@@ -149,7 +247,7 @@ OpenSCENARIO:
                                   conditionEdge: none
                                   ByValueCondition:
                                     SimulationTimeCondition:
-                                      value: 1
+                                      value: 4
                                       rule: greaterThan
                         Action:
                           - name: ''
@@ -164,7 +262,7 @@ OpenSCENARIO:
                       conditionEdge: none
                       ByValueCondition:
                         SimulationTimeCondition:
-                          value: 1
+                          value: 4
                           rule: greaterThan
     StopTrigger:
       ConditionGroup: []

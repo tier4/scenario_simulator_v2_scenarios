@@ -97,16 +97,6 @@ OpenSCENARIO:
                                       SpeedCondition:
                                         value: ${2.0 + $minimum_speed_difference_at_init}
                                         rule: lessThan
-                      - name: Failure
-                        priority: parallel
-                        Action:
-                          - name: ''
-                            UserDefinedAction:
-                              CustomCommandAction:
-                                type: exitFailure
-                        StartTrigger:
-                          ConditionGroup:
-                            - Condition:
                                 - name: ''
                                   delay: 0
                                   conditionEdge: none

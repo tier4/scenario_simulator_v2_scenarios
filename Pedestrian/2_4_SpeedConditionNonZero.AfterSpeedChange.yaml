@@ -65,13 +65,64 @@ OpenSCENARIO:
     Story:
       - name: ''
         Act:
-          - name: act_PedestrianAccelerationTest
+          - name: act_PedestrianSpeedChange
             ManeuverGroup:
               - maximumExecutionCount: 1
-                name: act_PedestrianAccelerationTest
+                name: act_PedestrianSpeedChange
                 Actors:
                   selectTriggeringEntities: false
-                  EntityRef: []
+                  EntityRef:
+                    - entityRef: Pedestrian0
+                Maneuver:
+                  - name: ''
+                    Event:
+                      - name: SpeedChange
+                        priority: parallel
+                        Action:
+                          - name: 
+                            PrivateAction:
+                              LongitudinalAction:
+                                SpeedAction:
+                                  SpeedActionDynamics:
+                                    dynamicsDimension: time
+                                    value: 0
+                                    dynamicsShape: step
+                                  SpeedActionTarget:
+                                    AbsoluteTargetSpeed:
+                                      value: 2.0
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: Pedestrian0
+                                    EntityCondition:
+                                      SpeedCondition:
+                                        value: $minimum_speed_difference_at_init
+                                        rule: lessThan
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - name: ''
+                      delay: 0
+                      conditionEdge: none
+                      ByValueCondition:
+                        SimulationTimeCondition:
+                          value: 0
+                          rule: greaterThan
+          - name: act_PedestrianSpeedTest
+            ManeuverGroup:
+              - maximumExecutionCount: 1
+                name: act_PedestrianSpeedTest
+                Actors:
+                  selectTriggeringEntities: false
+                  EntityRef:
+                    - entityRef: npc
                 Maneuver:
                   - name: ''
                     Event:
@@ -94,19 +145,9 @@ OpenSCENARIO:
                                       EntityRef:
                                         - entityRef: Pedestrian0
                                     EntityCondition:
-                                      AccelerationCondition:
-                                        value: $minimum_acceleration_difference_at_standstill
+                                      SpeedCondition:
+                                        value: ${2.0 + $minimum_speed_difference_at_init}
                                         rule: lessThan
-                      - name: Failure
-                        priority: parallel
-                        Action:
-                          - name: ''
-                            UserDefinedAction:
-                              CustomCommandAction:
-                                type: exitFailure
-                        StartTrigger:
-                          ConditionGroup:
-                            - Condition:
                                 - name: ''
                                   delay: 0
                                   conditionEdge: none
@@ -116,9 +157,9 @@ OpenSCENARIO:
                                       EntityRef:
                                         - entityRef: Pedestrian0
                                     EntityCondition:
-                                      AccelerationCondition:
-                                        value: $minimum_acceleration_difference_at_standstill
-                                        rule: lessThan
+                                      SpeedCondition:
+                                        value: ${2.0 - $minimum_speed_difference_at_init}
+                                        rule: greaterThan
             StartTrigger:
               ConditionGroup:
                 - Condition:
@@ -127,7 +168,7 @@ OpenSCENARIO:
                       conditionEdge: none
                       ByValueCondition:
                         SimulationTimeCondition:
-                          value: 0
+                          value: 1
                           rule: greaterThan
           - name: _EndCondition
             ManeuverGroup:
@@ -149,7 +190,7 @@ OpenSCENARIO:
                                   conditionEdge: none
                                   ByValueCondition:
                                     SimulationTimeCondition:
-                                      value: 1
+                                      value: 2
                                       rule: greaterThan
                         Action:
                           - name: ''
@@ -164,7 +205,7 @@ OpenSCENARIO:
                       conditionEdge: none
                       ByValueCondition:
                         SimulationTimeCondition:
-                          value: 1
+                          value: 2
                           rule: greaterThan
     StopTrigger:
       ConditionGroup: []

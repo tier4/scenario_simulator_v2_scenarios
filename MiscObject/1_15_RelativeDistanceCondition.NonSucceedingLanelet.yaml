@@ -4,7 +4,7 @@ OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2023-11-20T12:12:39.915Z'
+    date: '2023-09-18T15:11:54.915Z'
     description: ''
     author: Piotr Zyskowski
   ParameterDeclarations:
@@ -18,7 +18,7 @@ OpenSCENARIO:
       - { name: minimum_acceleration_difference_at_standstill, parameterType: double, value: 0.01 }
       - { name: minimum_acceleration_difference, parameterType: double, value: 0.5 }
   CatalogLocations:
-    PedestrianCatalog:
+    MiscObjectCatalog:
       Directory:
         path: $(ros2 pkg prefix --share scenario_simulator_v2_scenarios)/catalog
   RoadNetwork:
@@ -28,47 +28,53 @@ OpenSCENARIO:
       TrafficSignalController: []
   Entities:
     ScenarioObject:
-      - name: Pedestrian0
+      - name: Misc0
         CatalogReference:
-          catalogName: TestPedestrians
-          entryName: RegularPerson
+          catalogName: TestMiscObjects
+          entryName: RoadBlockade
+      - name: Misc1
+        CatalogReference:
+          catalogName: TestMiscObjects
+          entryName: RoadBlockade
   Storyboard:
     Init:
       Actions:
         GlobalAction:
-          EntityAction:
-            entityRef: Pedestrian0
-            AddEntityAction:
-              Position:
-                LanePosition:
-                  roadId: ''
-                  laneId: '34705'
-                  s: 1
-                  offset: 0
-                  Orientation:
-                    type: relative
-                    h: 0
-                    p: 0
-                    r: 0
-        Private:
-          - entityRef: Pedestrian0
-            PrivateAction:
-              - LongitudinalAction:
-                  SpeedAction:
-                    SpeedActionDynamics:
-                      dynamicsDimension: time
-                      value: 0
-                      dynamicsShape: step
-                    SpeedActionTarget:
-                      AbsoluteTargetSpeed:
-                        value: 0
+          - EntityAction:
+              entityRef: Misc0
+              AddEntityAction:
+                Position:
+                  LanePosition:
+                    roadId: ''
+                    laneId: '34705'
+                    s: 1
+                    offset: 0
+                    Orientation:
+                      type: relative
+                      h: 0
+                      p: 0
+                      r: 0
+          - EntityAction:
+              entityRef: Misc1
+              AddEntityAction:
+                Position:
+                  LanePosition:
+                    roadId: ''
+                    laneId: '34741'
+                    s: 1
+                    offset: 0
+                    Orientation:
+                      type: relative
+                      h: 0
+                      p: 0
+                      r: 0
     Story:
       - name: ''
         Act:
-          - name: act_PedestrianAccelerationTest
+          - name: act_MiscObjectPositionTest
             ManeuverGroup:
               - maximumExecutionCount: 1
-                name: act_PedestrianAccelerationTest
+                name: act_MiscObjectPositionTest
                 Actors:
                   selectTriggeringEntities: false
                   EntityRef: []
@@ -92,12 +98,34 @@ OpenSCENARIO:
                                     TriggeringEntities:
                                       triggeringEntitiesRule: any
                                       EntityRef:
-                                        - entityRef: Pedestrian0
+                                        - entityRef: Misc0
                                     EntityCondition:
-                                      AccelerationCondition:
-                                        value: $minimum_acceleration_difference_at_standstill
+                                      RelativeDistanceCondition:
+                                        coordinateSystem: lane
+                                        entityRef: Misc1
+                                        freespace: false 
+                                        relativeDistanceType: longitudinal
+                                        rule: greaterThan
+                                        value: ${40.0 - $minimum_distance_difference_at_init}
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: Misc0
+                                    EntityCondition:
+                                      RelativeDistanceCondition:
+                                        coordinateSystem: lane
+                                        entityRef: Misc1
+                                        freespace: false 
+                                        relativeDistanceType: longitudinal
                                         rule: lessThan
-                      - name: Failure
+                                        value: ${40.0 + $minimum_distance_difference_at_init}
+                  - name: ''
+                    Event:
+                      - name: Success
                         priority: parallel
                         Action:
                           - name: ''
@@ -110,15 +138,10 @@ OpenSCENARIO:
                                 - name: ''
                                   delay: 0
                                   conditionEdge: none
-                                  ByEntityCondition:
-                                    TriggeringEntities:
-                                      triggeringEntitiesRule: any
-                                      EntityRef:
-                                        - entityRef: Pedestrian0
-                                    EntityCondition:
-                                      AccelerationCondition:
-                                        value: $minimum_acceleration_difference_at_standstill
-                                        rule: lessThan
+                                  ByValueCondition:
+                                    SimulationTimeCondition:
+                                      value: 1
+                                      rule: greaterThan
             StartTrigger:
               ConditionGroup:
                 - Condition:
@@ -168,3 +191,4 @@ OpenSCENARIO:
                           rule: greaterThan
     StopTrigger:
       ConditionGroup: []
+
