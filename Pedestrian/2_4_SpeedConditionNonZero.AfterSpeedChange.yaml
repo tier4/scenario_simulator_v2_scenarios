@@ -118,7 +118,7 @@ OpenSCENARIO:
           - name: act_PedestrianSpeedTest
             ManeuverGroup:
               - maximumExecutionCount: 1
-                name: act_PedestrianSpeedTest
+                name: PedestrianSpeedTest
                 Actors:
                   selectTriggeringEntities: false
                   EntityRef:

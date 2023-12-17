@@ -68,7 +68,7 @@ OpenSCENARIO:
           - name: act_PedestrianSpeedChange
             ManeuverGroup:
               - maximumExecutionCount: 1
-                name: act_PedestrianSpeedChange
+                name: PedestrianSpeedChange
                 Actors:
                   selectTriggeringEntities: false
                   EntityRef:

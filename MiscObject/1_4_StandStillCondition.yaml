@@ -53,10 +53,10 @@ OpenSCENARIO:
     Story:
       - name: ''
         Act:
-          - name: act_MiscObjectPositionTest
+          - name: act_MiscObjectStandstillTest
             ManeuverGroup:
               - maximumExecutionCount: 1
-                name: act_MiscObjectPositionTest
+                name: MiscObjectStandstillTest
                 Actors:
                   selectTriggeringEntities: false
                   EntityRef: []

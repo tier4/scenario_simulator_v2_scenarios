@@ -56,7 +56,7 @@ OpenSCENARIO:
           - name: act_PedestrianPositionTest
             ManeuverGroup:
               - maximumExecutionCount: 1
-                name: act_PedestrianPositionTest
+                name: PedestrianPositionTest
                 Actors:
                   selectTriggeringEntities: false
                   EntityRef: []

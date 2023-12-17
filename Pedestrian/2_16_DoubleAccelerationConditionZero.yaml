@@ -94,10 +94,10 @@ OpenSCENARIO:
     Story:
       - name: ''
         Act:
-          - name: act_PedestrianPositionTest
+          - name: act_PedestrianAccelerationTest
             ManeuverGroup:
               - maximumExecutionCount: 1
-                name: act_PedestrianPositionTest
+                name: PedestrianAccelerationTest
                 Actors:
                   selectTriggeringEntities: false
                   EntityRef: []
