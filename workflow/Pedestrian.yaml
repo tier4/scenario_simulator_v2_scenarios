@@ -14,11 +14,4 @@ Scenario:
   - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_15_DoubleSpeedConditionNonZero.yaml
   - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_16_DoubleAccelerationConditionZero.yaml
   - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_19_DoubleStandStillConditionZeroSpeed.yaml
-
-
-
-
-
-
-
-
+  - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_21_CollisionCondition.yaml
