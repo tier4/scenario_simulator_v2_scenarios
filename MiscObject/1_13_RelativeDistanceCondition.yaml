@@ -61,7 +61,7 @@ OpenSCENARIO:
                   LanePosition:
                     roadId: ''
                     laneId: '34705'
-                    s: 3
+                    s: 2
                     offset: 0
                     Orientation:
                       type: relative
@@ -71,10 +71,10 @@ OpenSCENARIO:
     Story:
       - name: ''
         Act:
-          - name: act_MiscObjectStandstillTest
+          - name: act_MiscObjectDistanceTest
             ManeuverGroup:
               - maximumExecutionCount: 1
-                name: MiscObjectStandstillTest
+                name: MiscObjectDistanceTest
                 Actors:
                   selectTriggeringEntities: false
                   EntityRef: []
@@ -100,8 +100,13 @@ OpenSCENARIO:
                                       EntityRef:
                                         - entityRef: Misc0
                                     EntityCondition:
-                                      StandStillCondition:
-                                        duration: $minimum_standstill_detection_time
+                                      RelativeDistanceCondition:
+                                        coordinateSystem: lane
+                                        entityRef: Misc1
+                                        freespace: false 
+                                        relativeDistanceType: longitudinal
+                                        rule: greaterThan
+                                        value: ${1.0 - $minimum_distance_difference_at_init}
                                 - name: ''
                                   delay: 0
                                   conditionEdge: none
@@ -109,10 +114,15 @@ OpenSCENARIO:
                                     TriggeringEntities:
                                       triggeringEntitiesRule: any
                                       EntityRef:
-                                        - entityRef: Misc1
+                                        - entityRef: Misc0
                                     EntityCondition:
-                                      StandStillCondition:
-                                        duration: $minimum_standstill_detection_time
+                                      RelativeDistanceCondition:
+                                        coordinateSystem: lane
+                                        entityRef: Misc1
+                                        freespace: false 
+                                        relativeDistanceType: longitudinal
+                                        rule: lessThan
+                                        value: ${1.0 + $minimum_distance_difference_at_init}
             StartTrigger:
               ConditionGroup:
                 - Condition:
@@ -162,3 +172,4 @@ OpenSCENARIO:
                           rule: greaterThan
     StopTrigger:
       ConditionGroup: []
+

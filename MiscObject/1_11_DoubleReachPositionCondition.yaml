@@ -71,10 +71,10 @@ OpenSCENARIO:
     Story:
       - name: ''
         Act:
-          - name: act_MiscObjectStandstillTest
+          - name: act_MiscObjectReachPositionTest
             ManeuverGroup:
               - maximumExecutionCount: 1
-                name: MiscObjectStandstillTest
+                name: MiscObjectReachPositionTest
                 Actors:
                   selectTriggeringEntities: false
                   EntityRef: []
@@ -100,8 +100,19 @@ OpenSCENARIO:
                                       EntityRef:
                                         - entityRef: Misc0
                                     EntityCondition:
-                                      StandStillCondition:
-                                        duration: $minimum_standstill_detection_time
+                                      ReachPositionCondition:
+                                        Position:
+                                          LanePosition:
+                                            roadId: ''
+                                            laneId: '34705'
+                                            s: 1
+                                            offset: 0
+                                            Orientation:
+                                              type: relative
+                                              h: 0
+                                              p: 0
+                                              r: 0
+                                        tolerance: $minimum_distance_difference_at_init
                                 - name: ''
                                   delay: 0
                                   conditionEdge: none
@@ -111,8 +122,19 @@ OpenSCENARIO:
                                       EntityRef:
                                         - entityRef: Misc1
                                     EntityCondition:
-                                      StandStillCondition:
-                                        duration: $minimum_standstill_detection_time
+                                      ReachPositionCondition:
+                                        Position:
+                                          LanePosition:
+                                            roadId: ''
+                                            laneId: '34705'
+                                            s: 3
+                                            offset: 0
+                                            Orientation:
+                                              type: relative
+                                              h: 0
+                                              p: 0
+                                              r: 0
+                                        tolerance: $minimum_distance_difference_at_init
             StartTrigger:
               ConditionGroup:
                 - Condition:

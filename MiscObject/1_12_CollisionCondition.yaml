@@ -61,7 +61,7 @@ OpenSCENARIO:
                   LanePosition:
                     roadId: ''
                     laneId: '34705'
-                    s: 3
+                    s: 1
                     offset: 0
                     Orientation:
                       type: relative
@@ -71,10 +71,10 @@ OpenSCENARIO:
     Story:
       - name: ''
         Act:
-          - name: act_MiscObjectStandstillTest
+          - name: act_MiscObjectCollisionTest
             ManeuverGroup:
               - maximumExecutionCount: 1
-                name: MiscObjectStandstillTest
+                name: MiscObjectCollisionTest
                 Actors:
                   selectTriggeringEntities: false
                   EntityRef: []
@@ -100,19 +100,9 @@ OpenSCENARIO:
                                       EntityRef:
                                         - entityRef: Misc0
                                     EntityCondition:
-                                      StandStillCondition:
-                                        duration: $minimum_standstill_detection_time
-                                - name: ''
-                                  delay: 0
-                                  conditionEdge: none
-                                  ByEntityCondition:
-                                    TriggeringEntities:
-                                      triggeringEntitiesRule: any
-                                      EntityRef:
+                                      CollisionCondition:
+                                        EntityRef: 
                                         - entityRef: Misc1
-                                    EntityCondition:
-                                      StandStillCondition:
-                                        duration: $minimum_standstill_detection_time
             StartTrigger:
               ConditionGroup:
                 - Condition:

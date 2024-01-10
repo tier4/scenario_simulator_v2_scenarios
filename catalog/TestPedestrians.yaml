@@ -1,0 +1,25 @@
+OpenSCENARIO:
+  FileHeader:
+    revMajor: 1
+    revMinor: 0
+    date: "1970-01-01T09:00:00+09:00"
+    description: ""
+    author: "Piotr Zyskowski"
+  Catalog:
+    name: TestPedestrians
+    Pedestrian:
+      name: RegularPerson
+      mass: 70
+      model: ""
+      pedestrianCategory: pedestrian
+      BoundingBox:
+        Center:
+          x: 0.125
+          y: 0.25
+          z: 0.9
+        Dimensions:
+          length: 0.25
+          width: 0.5
+          height: 1.8
+      Properties:
+        Property: []

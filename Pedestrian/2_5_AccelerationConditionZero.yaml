@@ -4,7 +4,7 @@ OpenSCENARIO:
   FileHeader:
     revMajor: 1
     revMinor: 1
-    date: '2023-09-18T15:11:54.915Z'
+    date: '2023-11-20T12:12:39.915Z'
     description: ''
     author: Piotr Zyskowski
   ParameterDeclarations:
@@ -18,7 +18,7 @@ OpenSCENARIO:
       - { name: minimum_acceleration_difference_at_standstill, parameterType: double, value: 0.01 }
       - { name: minimum_acceleration_difference, parameterType: double, value: 0.5 }
   CatalogLocations:
-    MiscObjectCatalog:
+    PedestrianCatalog:
       Directory:
         path: $(ros2 pkg prefix --share scenario_simulator_v2_scenarios)/catalog
   RoadNetwork:
@@ -28,53 +28,47 @@ OpenSCENARIO:
       TrafficSignalController: []
   Entities:
     ScenarioObject:
-      - name: Misc0
+      - name: Pedestrian0
         CatalogReference:
-          catalogName: TestMiscObjects
-          entryName: RoadBlockade
-      - name: Misc1
-        CatalogReference:
-          catalogName: TestMiscObjects
-          entryName: RoadBlockade
+          catalogName: TestPedestrians
+          entryName: RegularPerson
   Storyboard:
     Init:
       Actions:
         GlobalAction:
-          - EntityAction:
-              entityRef: Misc0
-              AddEntityAction:
-                Position:
-                  LanePosition:
-                    roadId: ''
-                    laneId: '34705'
-                    s: 1
-                    offset: 0
-                    Orientation:
-                      type: relative
-                      h: 0
-                      p: 0
-                      r: 0
-          - EntityAction:
-              entityRef: Misc1
-              AddEntityAction:
-                Position:
-                  LanePosition:
-                    roadId: ''
-                    laneId: '34705'
-                    s: 3
-                    offset: 0
-                    Orientation:
-                      type: relative
-                      h: 0
-                      p: 0
-                      r: 0
+          EntityAction:
+            entityRef: Pedestrian0
+            AddEntityAction:
+              Position:
+                LanePosition:
+                  roadId: ''
+                  laneId: '34705'
+                  s: 1
+                  offset: 0
+                  Orientation:
+                    type: relative
+                    h: 0
+                    p: 0
+                    r: 0
+        Private:
+          - entityRef: Pedestrian0
+            PrivateAction:
+              - LongitudinalAction:
+                  SpeedAction:
+                    SpeedActionDynamics:
+                      dynamicsDimension: time
+                      value: 0
+                      dynamicsShape: step
+                    SpeedActionTarget:
+                      AbsoluteTargetSpeed:
+                        value: 0
     Story:
       - name: ''
         Act:
-          - name: act_MiscObjectStandstillTest
+          - name: act_PedestrianAccelerationTest
             ManeuverGroup:
               - maximumExecutionCount: 1
-                name: MiscObjectStandstillTest
+                name: PedestrianAccelerationTest
                 Actors:
                   selectTriggeringEntities: false
                   EntityRef: []
@@ -98,10 +92,21 @@ OpenSCENARIO:
                                     TriggeringEntities:
                                       triggeringEntitiesRule: any
                                       EntityRef:
-                                        - entityRef: Misc0
+                                        - entityRef: Pedestrian0
                                     EntityCondition:
-                                      StandStillCondition:
-                                        duration: $minimum_standstill_detection_time
+                                      AccelerationCondition:
+                                        value: $minimum_acceleration_difference_at_standstill
+                                        rule: lessThan
+                      - name: Failure
+                        priority: parallel
+                        Action:
+                          - name: ''
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: exitFailure
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
                                 - name: ''
                                   delay: 0
                                   conditionEdge: none
@@ -109,10 +114,11 @@ OpenSCENARIO:
                                     TriggeringEntities:
                                       triggeringEntitiesRule: any
                                       EntityRef:
-                                        - entityRef: Misc1
+                                        - entityRef: Pedestrian0
                                     EntityCondition:
-                                      StandStillCondition:
-                                        duration: $minimum_standstill_detection_time
+                                      AccelerationCondition:
+                                        value: $minimum_acceleration_difference_at_standstill
+                                        rule: lessThan
             StartTrigger:
               ConditionGroup:
                 - Condition:

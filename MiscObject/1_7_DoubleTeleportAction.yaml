@@ -74,7 +74,7 @@ OpenSCENARIO:
           - name: act_MiscObjectPositionTest
             ManeuverGroup:
               - maximumExecutionCount: 1
-                name: act_MiscObjectPositionTest
+                name: MiscObjectPositionTest
                 Actors:
                   selectTriggeringEntities: false
                   EntityRef: []
