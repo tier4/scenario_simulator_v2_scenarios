@@ -7,11 +7,20 @@ Scenario:
   - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_5_AccelerationConditionZero.yaml
   - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_6_AccelerationConditionNonZero.yaml
   - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_7_StandStillConditionZeroSpeed.yaml
+  - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_8_StandStillConditionFromNonZeroSpeed.yaml
   - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_9_ReachPositionConditionStartingPose.yaml
+  - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_10_ReachPositionConditionNonStartingPose.yaml
   - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_11_DoubleAddEntityAction.yaml
   - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_12_DoubleTeleportAction.yaml
   - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_13_DoubleSpeedConditionZero.yaml
+  - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_14_DoubleSpeedConditionNonZero.AfterSpeedChange.yaml
   - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_15_DoubleSpeedConditionNonZero.yaml
   - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_16_DoubleAccelerationConditionZero.yaml
-  - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_19_DoubleStandStillConditionZeroSpeed.yaml
+  - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_17_DoubleAccelerationConditionNonZero.yaml
+  - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_18_DoubleStandStillConditionZeroSpeed.yaml
+  - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_19_DoubleStandStillConditionNonZeroSpeed.yaml
+  - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_20_DoubleReachPositionConditionStartingPose.yaml
   - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_21_CollisionCondition.yaml
+  - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_22_RelativeDistanceCondition_SameLanelet.yaml
+  - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_23_RelativeDistanceCondition_SucceedingLanelet.yaml
+  - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_24_RelativeDistanceCondition_NonSucceedingLanelet.yaml
