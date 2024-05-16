@@ -1,1 +1,15 @@
 $(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_0_AddEntityAction.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_1_TeleportAction.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_2_SpeedConditionZero.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_3_SpeedConditionNonZero.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_4_SpeedConditionNonZero.AfterSpeedChange.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_5_AccelerationConditionZero.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_6_AccelerationConditionNonZero.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_7_StandStillConditionZeroSpeed.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_8_StandStillConditionFromNonZeroSpeed.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_9_ReachPositionConditionStartingPose.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_10_ReachPositionConditionNonStartingPose.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_11_DoubleAddEntityAction.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_12_DoubleTeleportAction.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_13_DoubleSpeedConditionZero.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_14_DoubleSpeedConditionNonZero.AfterSpeedChange.yaml
