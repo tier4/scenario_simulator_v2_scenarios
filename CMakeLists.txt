@@ -10,6 +10,7 @@ install(
         basic
         MiscObject
         Pedestrian
+        Vehicle
         map
         workflow
   DESTINATION share/${PROJECT_NAME})

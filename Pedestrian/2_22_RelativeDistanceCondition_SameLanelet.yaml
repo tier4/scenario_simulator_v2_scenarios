@@ -1,0 +1,195 @@
+ScenarioModifiers:
+  ScenarioModifier: []
+OpenSCENARIO:
+  FileHeader:
+    revMajor: 1
+    revMinor: 1
+    date: '2023-11-20T12:12:39.915Z'
+    description: ''
+    author: Piotr Zyskowski
+  ParameterDeclarations:
+    ParameterDeclaration:
+      - { name: minimum_update_rate, parameterType: double, value: 2.0 }
+      - { name: minimum_standstill_detection_time, parameterType: double, value: 1.0 }
+      - { name: minimum_distance_difference_at_init, parameterType: double, value: 0.01 }
+      - { name: minimum_distance_difference, parameterType: double, value: 0.5 }
+      - { name: minimum_speed_difference_at_init, parameterType: double, value: 0.01 }
+      - { name: minimum_speed_difference, parameterType: double, value: 0.5 }
+      - { name: minimum_acceleration_difference_at_standstill, parameterType: double, value: 0.01 }
+      - { name: minimum_acceleration_difference, parameterType: double, value: 0.5 }
+  CatalogLocations:
+    PedestrianCatalog:
+      Directory:
+        path: $(ros2 pkg prefix --share scenario_simulator_v2_scenarios)/catalog
+  RoadNetwork:
+    LogicFile:
+      filepath: $(ros2 pkg prefix --share scenario_simulator_v2_scenarios)/map
+    TrafficSignals:
+      TrafficSignalController: []
+  Entities:
+    ScenarioObject:
+      - name: Pedestrian0
+        CatalogReference:
+          catalogName: TestPedestrians
+          entryName: RegularPerson
+      - name: Pedestrian1
+        CatalogReference:
+          catalogName: TestPedestrians
+          entryName: RegularPerson
+  Storyboard:
+    Init:
+      Actions:
+        GlobalAction:
+          - EntityAction:
+              entityRef: Pedestrian0
+              AddEntityAction:
+                Position:
+                  LanePosition:
+                    roadId: ''
+                    laneId: '34705'
+                    s: 1
+                    offset: 0
+                    Orientation:
+                      type: relative
+                      h: 0
+                      p: 0
+                      r: 0
+          - EntityAction:
+              entityRef: Pedestrian1
+              AddEntityAction:
+                Position:
+                  LanePosition:
+                    roadId: ''
+                    laneId: '34705'
+                    s: 3
+                    offset: 0
+                    Orientation:
+                      type: relative
+                      h: 0
+                      p: 0
+                      r: 0
+        Private:
+          - entityRef: Pedestrian0
+            PrivateAction:
+              - LongitudinalAction:
+                  SpeedAction:
+                    SpeedActionDynamics:
+                      dynamicsDimension: time
+                      value: 0
+                      dynamicsShape: step
+                    SpeedActionTarget:
+                      AbsoluteTargetSpeed:
+                        value: 0
+          - entityRef: Pedestrian1
+            PrivateAction:
+              - LongitudinalAction:
+                  SpeedAction:
+                    SpeedActionDynamics:
+                      dynamicsDimension: time
+                      value: 0
+                      dynamicsShape: step
+                    SpeedActionTarget:
+                      AbsoluteTargetSpeed:
+                        value: 0
+    Story:
+      - name: ''
+        Act:
+          - name: act_PedestrianRelativeDistanceTest
+            ManeuverGroup:
+              - maximumExecutionCount: 1
+                name: PedestrianSpeedTest
+                Actors:
+                  selectTriggeringEntities: false
+                  EntityRef: []
+                Maneuver:
+                  - name: ''
+                    Event:
+                      - name: Success
+                        priority: parallel
+                        Action:
+                          - name: ''
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: exitSuccess
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: Pedestrian0
+                                    EntityCondition:
+                                      RelativeDistanceCondition:
+                                        entityRef: Pedestrian1
+                                        value: ${2.0 + $minimum_distance_difference_at_init}
+                                        rule: lessThan
+                                        relativeDistanceType: longitudinal
+                                        freespace: false
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByEntityCondition:
+                                    TriggeringEntities:
+                                      triggeringEntitiesRule: any
+                                      EntityRef:
+                                        - entityRef: Pedestrian0
+                                    EntityCondition:
+                                      RelativeDistanceCondition:
+                                        entityRef: Pedestrian1
+                                        value: ${2.0 - $minimum_distance_difference_at_init}
+                                        rule: greaterThan
+                                        relativeDistanceType: longitudinal
+                                        freespace: false
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - name: ''
+                      delay: 0
+                      conditionEdge: none
+                      ByValueCondition:
+                        SimulationTimeCondition:
+                          value: 0
+                          rule: greaterThan
+          - name: _EndCondition
+            ManeuverGroup:
+              - maximumExecutionCount: 1
+                name: ''
+                Actors:
+                  selectTriggeringEntities: false
+                  EntityRef: []
+                Maneuver:
+                  - name: ''
+                    Event:
+                      - name: ''
+                        priority: parallel
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
+                                - name: ''
+                                  delay: 0
+                                  conditionEdge: none
+                                  ByValueCondition:
+                                    SimulationTimeCondition:
+                                      value: 1
+                                      rule: greaterThan
+                        Action:
+                          - name: ''
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: exitFailure
+            StartTrigger:
+              ConditionGroup:
+                - Condition:
+                    - name: ''
+                      delay: 0
+                      conditionEdge: none
+                      ByValueCondition:
+                        SimulationTimeCondition:
+                          value: 1
+                          rule: greaterThan
+    StopTrigger:
+      ConditionGroup: []
