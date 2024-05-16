@@ -1,2 +1,0 @@
-Scenario:
-  - path: $(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_0_AddEntityAction.yaml
