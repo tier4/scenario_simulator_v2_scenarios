@@ -28,101 +28,56 @@ OpenSCENARIO:
       TrafficSignalController: []
   Entities:
     ScenarioObject:
-      - name: Vehicle0
+      - name: Ego0
         CatalogReference:
           catalogName: TestVehicles
           entryName: Taxi
+        ObjectController:
+          Controller:
+            name: 'Autoware'
+            Properties:
+              Property: []
   Storyboard:
     Init:
       Actions:
-        GlobalAction:
-          EntityAction:
-            entityRef: Vehicle0
-            AddEntityAction:
-              Position:
-                LanePosition:
-                  roadId: ''
-                  laneId: '34705'
-                  s: 1
-                  offset: 0
-                  Orientation:
-                    type: relative
-                    h: 0
-                    p: 0
-                    r: 0
         Private:
-          - entityRef: Vehicle0
+          - entityRef: Ego0
             PrivateAction:
-              - LongitudinalAction:
-                  SpeedAction:
-                    SpeedActionDynamics:
-                      dynamicsDimension: time
-                      value: 0
-                      dynamicsShape: step
-                    SpeedActionTarget:
-                      AbsoluteTargetSpeed:
-                        value: 0
+              - TeleportAction:
+                  Position:
+                    LanePosition:
+                      roadId: ''
+                      laneId: '34705'
+                      s: 1
+                      offset: 0
+                      Orientation:
+                        type: relative
+                        h: 0
+                        p: 0
+                        r: 0
+              - RoutingAction:
+                  AcquirePositionAction:
+                    Position:
+                      LanePosition:
+                        roadId: ''
+                        laneId: '34705'
+                        s: 2
+                        offset: 0
+                        Orientation:
+                          type: relative
+                          h: 0
+                          p: 0
+                          r: 0
     Story:
       - name: ''
         Act:
-          - name: act_VehicleSpeedChange
+          - name: act_VehiclePositionTest
             ManeuverGroup:
               - maximumExecutionCount: 1
-                name: act_VehicleSpeedChange
+                name: VehiclePositionTest
                 Actors:
                   selectTriggeringEntities: false
-                  EntityRef:
-                    - entityRef: Vehicle0
-                Maneuver:
-                  - name: ''
-                    Event:
-                      - name: SpeedChange
-                        priority: parallel
-                        Action:
-                          - name: 
-                            PrivateAction:
-                              LongitudinalAction:
-                                SpeedAction:
-                                  SpeedActionDynamics:
-                                    dynamicsDimension: time
-                                    value: 0
-                                    dynamicsShape: step
-                                  SpeedActionTarget:
-                                    AbsoluteTargetSpeed:
-                                      value: 2.0
-                        StartTrigger:
-                          ConditionGroup:
-                            - Condition:
-                                - name: ''
-                                  delay: 0
-                                  conditionEdge: none
-                                  ByEntityCondition:
-                                    TriggeringEntities:
-                                      triggeringEntitiesRule: any
-                                      EntityRef:
-                                        - entityRef: Vehicle0
-                                    EntityCondition:
-                                      SpeedCondition:
-                                        value: $minimum_speed_difference_at_init
-                                        rule: lessThan
-            StartTrigger:
-              ConditionGroup:
-                - Condition:
-                    - name: ''
-                      delay: 0
-                      conditionEdge: none
-                      ByValueCondition:
-                        SimulationTimeCondition:
-                          value: 0
-                          rule: greaterThan
-          - name: act_VehicleSpeedTest
-            ManeuverGroup:
-              - maximumExecutionCount: 1
-                name: VehicleSpeedTest
-                Actors:
-                  selectTriggeringEntities: false
-                  EntityRef:
-                    - entityRef: Vehicle0
+                  EntityRef: []
                 Maneuver:
                   - name: ''
                     Event:
@@ -143,11 +98,35 @@ OpenSCENARIO:
                                     TriggeringEntities:
                                       triggeringEntitiesRule: any
                                       EntityRef:
-                                        - entityRef: Vehicle0
+                                        - entityRef: Ego0
                                     EntityCondition:
-                                      SpeedCondition:
-                                        value: ${2.0 + $minimum_speed_difference_at_init}
+                                      DistanceCondition:
+                                        Position:
+                                          LanePosition:
+                                            roadId: ''
+                                            laneId: '34705'
+                                            s: 1
+                                            offset: 0
+                                            Orientation:
+                                              type: relative
+                                              h: 0
+                                              p: 0.0
+                                              r: 0
+                                        value: $minimum_distance_difference_at_init
+                                        freespace: false
+                                        relativeDistanceType: longitudinal
+                                        coordinateSystem: lane
                                         rule: lessThan
+                      - name: Failure
+                        priority: parallel
+                        Action:
+                          - name: ''
+                            UserDefinedAction:
+                              CustomCommandAction:
+                                type: exitFailure
+                        StartTrigger:
+                          ConditionGroup:
+                            - Condition:
                                 - name: ''
                                   delay: 0
                                   conditionEdge: none
@@ -155,10 +134,24 @@ OpenSCENARIO:
                                     TriggeringEntities:
                                       triggeringEntitiesRule: any
                                       EntityRef:
-                                        - entityRef: Vehicle0
+                                        - entityRef: Ego0
                                     EntityCondition:
-                                      SpeedCondition:
-                                        value: ${2.0 - $minimum_speed_difference_at_init}
+                                      DistanceCondition:
+                                        Position:
+                                          LanePosition:
+                                            roadId: ''
+                                            laneId: '34705'
+                                            s: 1
+                                            offset: 0
+                                            Orientation:
+                                              type: relative
+                                              h: 0
+                                              p: 0.0
+                                              r: 0
+                                        value: $minimum_distance_difference_at_init
+                                        freespace: false
+                                        relativeDistanceType: longitudinal
+                                        coordinateSystem: lane
                                         rule: greaterThan
             StartTrigger:
               ConditionGroup:
@@ -168,7 +161,7 @@ OpenSCENARIO:
                       conditionEdge: none
                       ByValueCondition:
                         SimulationTimeCondition:
-                          value: 1
+                          value: 0
                           rule: greaterThan
           - name: _EndCondition
             ManeuverGroup:
@@ -190,7 +183,7 @@ OpenSCENARIO:
                                   conditionEdge: none
                                   ByValueCondition:
                                     SimulationTimeCondition:
-                                      value: 2
+                                      value: 1
                                       rule: greaterThan
                         Action:
                           - name: ''
@@ -205,7 +198,7 @@ OpenSCENARIO:
                       conditionEdge: none
                       ByValueCondition:
                         SimulationTimeCondition:
-                          value: 2
+                          value: 1
                           rule: greaterThan
     StopTrigger:
       ConditionGroup: []

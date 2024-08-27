@@ -13,3 +13,13 @@ $(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_11_DoubleAddEntityAc
 $(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_12_DoubleTeleportAction.yaml
 $(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_13_DoubleSpeedConditionZero.yaml
 $(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_14_DoubleSpeedConditionNonZero.AfterSpeedChange.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_15_DoubleSpeedConditionNonZero.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_16_DoubleAccelerationConditionZero.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_17_DoubleAccelerationConditionNonZero.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_18_DoubleStandStillConditionZeroSpeed.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_19_DoubleStandStillConditionNonZeroSpeed.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_20_DoubleReachPositionConditionStartingPose.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_21_CollisionCondition.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_22_RelativeDistanceCondition_SameLanelet.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_23_RelativeDistanceCondition_SucceedingLanelet.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Vehicle/3_24_RelativeDistanceCondition_NonSucceedingLanelet.yaml
