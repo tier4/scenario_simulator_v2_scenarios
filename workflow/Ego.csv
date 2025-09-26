@@ -1,0 +1,2 @@
+$(find-pkg-share scenario_simulator_v2_scenarios)/Ego/4_0_AddEntityAction.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Ego/4_1_TeleportAction.yaml

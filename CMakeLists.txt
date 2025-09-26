@@ -8,6 +8,7 @@ install(
   DIRECTORY
         catalog
         basic
+        Ego
         MiscObject
         Pedestrian
         Vehicle
