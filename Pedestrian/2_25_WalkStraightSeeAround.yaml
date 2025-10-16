@@ -32,6 +32,12 @@ OpenSCENARIO:
         CatalogReference:
           catalogName: TestPedestrians
           entryName: RegularPerson
+          ObjectController:
+            Controller:
+              name: ''
+              Properties:
+                Property:
+                  - { name: isBlind, value: 'true' }
       - name: Misc0
         CatalogReference:
           catalogName: TestMiscObjects

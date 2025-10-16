@@ -23,3 +23,5 @@ $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_21_CollisionCondi
 $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_22_RelativeDistanceCondition_SameLanelet.yaml
 $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_23_RelativeDistanceCondition_SucceedingLanelet.yaml
 $(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_24_RelativeDistanceCondition_NonSucceedingLanelet.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_25_WalkStraightSeeAround.yaml
+$(find-pkg-share scenario_simulator_v2_scenarios)/Pedestrian/2_26_WalkStraightSeeAroundFollow.yaml
