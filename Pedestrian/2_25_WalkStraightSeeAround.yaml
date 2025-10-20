@@ -32,16 +32,10 @@ OpenSCENARIO:
         CatalogReference:
           catalogName: TestPedestrians
           entryName: RegularPerson
-          ObjectController:
-            Controller:
-              name: ''
-              Properties:
-                Property:
-                  - { name: isBlind, value: 'true' }
-      - name: Misc0
+      - name: Pedestrian1
         CatalogReference:
-          catalogName: TestMiscObjects
-          entryName: RoadBlockade
+          catalogName: TestPedestrians
+          entryName: RegularPerson
   Storyboard:
     Init:
       Actions:
@@ -61,7 +55,7 @@ OpenSCENARIO:
                         p: 0
                         r: 0
           - EntityAction:
-              entityRef: Misc0
+              entityRef: Pedestrian1
               AddEntityAction:
                 Position:
                     LanePosition:
@@ -76,6 +70,17 @@ OpenSCENARIO:
                         r: 0
         Private:
           - entityRef: Pedestrian0
+            PrivateAction:
+              - LongitudinalAction:
+                  SpeedAction:
+                    SpeedActionDynamics:
+                      dynamicsDimension: time
+                      value: 0
+                      dynamicsShape: step
+                    SpeedActionTarget:
+                      AbsoluteTargetSpeed:
+                        value: 0
+          - entityRef: Pedestrian1
             PrivateAction:
               - LongitudinalAction:
                   SpeedAction:
@@ -217,7 +222,7 @@ OpenSCENARIO:
                                     EntityCondition:
                                       CollisionCondition:
                                         EntityRef:
-                                          entityRef: Misc0
+                                          entityRef: Pedestrian1
                         Action:
                           - name: ''
                             UserDefinedAction:
